@@ -1,11 +1,8 @@
 import express from "express";
 import "dotenv/config";
 const mysql = require("mysql2/promise");
-const cors = require("cors");
 
 var app = express();
-
-app.use(cors());
 
 if (!module.parent) {
   app.listen(3000);
