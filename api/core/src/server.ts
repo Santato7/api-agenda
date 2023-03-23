@@ -37,7 +37,7 @@ const getAllCompromissos = async () => {
 
   try {
     const [rows, fields] = await connection.execute(
-      "SELECT * FROM `COMPROMISSO` ORDER BY `DATA_COMPROMISSO`, HORA_COMPROMISSO"
+      "SELECT * FROM `COMPROMISSO` ORDER BY `DATA_COMPROMISSO`, `HORA_COMPROMISSO`"
     );
     return rows;
   } finally {
@@ -50,7 +50,7 @@ const getCompromissoById = async (_idCompromisso: number) => {
 
   try {
     const [rows, fields] = await connection.execute(
-      "SELECT * FROM `COMPROMISSO` WHERE `ID_COMPROMISSO` = ? ORDER BY `DATA_COMPROMISSO`, HORA_COMPROMISSO",
+      "SELECT * FROM `COMPROMISSO` WHERE `ID_COMPROMISSO` = ?",
       [_idCompromisso]
     );
     return rows;
