@@ -1,8 +1,11 @@
 import express from "express";
 import "dotenv/config";
 const mysql = require("mysql2/promise");
+const cors = require("cors");
 
 var app = express();
+
+app.use(cors());
 
 if (!module.parent) {
   app.listen(3000);
@@ -34,7 +37,7 @@ const getAllCompromissos = async () => {
 
   try {
     const [rows, fields] = await connection.execute(
-      "SELECT * FROM `COMPROMISSO`"
+      "SELECT * FROM `COMPROMISSO` ORDER BY `DATA_COMPROMISSO`, HORA_COMPROMISSO"
     );
     return rows;
   } finally {
@@ -47,7 +50,7 @@ const getCompromissoById = async (_idCompromisso: number) => {
 
   try {
     const [rows, fields] = await connection.execute(
-      "SELECT * FROM `COMPROMISSO` WHERE `ID_COMPROMISSO` = ?",
+      "SELECT * FROM `COMPROMISSO` WHERE `ID_COMPROMISSO` = ? ORDER BY `DATA_COMPROMISSO`, HORA_COMPROMISSO",
       [_idCompromisso]
     );
     return rows;
